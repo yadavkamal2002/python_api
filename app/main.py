@@ -5,7 +5,7 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from decouple import config
 
-from app.routers import image, video, mp3, image_to_pdf
+from app.routers import image, video_to_mp3, mp3_to_video, image_to_pdf, image_to_txt
 
 
 app = FastAPI(
@@ -56,6 +56,7 @@ async def custom_http_exception_handler(request, exc):
 
 # Include routers
 app.include_router(image.router, prefix="/image", tags=["Image Compression"])
-app.include_router(video.router, prefix="/video", tags=["Video to MP3"])
-app.include_router(mp3.router, prefix="/mp3", tags=["MP3 to Video"])
+app.include_router(video_to_mp3.router, prefix="/video", tags=["Video to MP3"])
+app.include_router(mp3_to_video.router, prefix="/mp3", tags=["MP3 to Video"])
 app.include_router(image_to_pdf.router, prefix="/pdf", tags=["Image to pdf"])
+app.include_router(image_to_txt.router, prefix="/text", tags=["Image to text"])
