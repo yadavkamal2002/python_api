@@ -4,9 +4,20 @@ from fastapi.responses import JSONResponse
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from decouple import config
-
-from app.routers import image, video_to_mp3, mp3_to_video, image_to_pdf, image_to_txt
-
+from app.routers import (
+    image,
+    video_to_mp3,
+    mp3_to_video,
+    image_to_pdf,
+    image_to_txt,
+    rotate_image,
+    compress_and_zip,
+    image_to_thumbnail,
+    image_to_base64,
+    image_watermark,
+    text_on_image,
+    video_thumbnail
+)
 
 app = FastAPI(
     title="Media Processing API",
@@ -60,3 +71,10 @@ app.include_router(video_to_mp3.router, prefix="/video", tags=["Video to MP3"])
 app.include_router(mp3_to_video.router, prefix="/mp3", tags=["MP3 to Video"])
 app.include_router(image_to_pdf.router, prefix="/pdf", tags=["Image to pdf"])
 app.include_router(image_to_txt.router, prefix="/text", tags=["Image to text"])
+app.include_router(rotate_image.router, prefix="/rotate", tags=["Image rotate"])
+app.include_router(compress_and_zip.router, prefix="/zip", tags=["Compress zip"])
+app.include_router(image_to_thumbnail.router, prefix="/thumbnail", tags=["Image to thumbnail"])
+app.include_router(image_to_base64.router, prefix="/base64", tags=["Image to base64"])
+app.include_router(image_watermark.router, prefix="/watermark", tags=["Image to watermark"])
+app.include_router(text_on_image.router, prefix="/text", tags=["Text to image"])
+app.include_router(video_thumbnail.router, prefix="/thumbnail", tags=["Video to thumbnail"])
